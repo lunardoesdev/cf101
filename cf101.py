@@ -159,7 +159,7 @@ rules:
   # ru
   - GEOIP,RU,DIRECT
   # other
-  - MATCH,nl
+  - MATCH,classic
 '''
 
 
