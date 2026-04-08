@@ -236,14 +236,16 @@ def main():
             text = warpgen0()
             data = json.loads(text)
             out = config_template.format(**data)
-            print(out)
+            # print(out)
             break
         except Exception as err:
             #print(f"Unexpected {err=}, {type(err)=}", file=sys.stderr)
             pass
     for i in range(1, 100):
         try:
-            make_qr(upload_text)
+            url = upload_text(out)
+            print(url)
+            make_qr(url)
             break
         except:
             pass
