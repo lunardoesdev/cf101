@@ -1,9 +1,15 @@
+#!/usr/bin/env -S uv run --script
+# /// script
+# requires-python = ">=3.12"
+# dependencies = ["qrcode[pil]"]
+# ///
+
 config_template = '''warp-common: &warp-common
   type: wireguard
-  ip: 172.16.0.2
-  ipv6: 2606:4700:110:8651:b29e:c8c4:eec6:7dd0
-  private-key: a6Bu+OSTj+OtFadHnEuz3SV/GBxF0mV/VOWeMpr1JaI=
-  public-key: bmXOC+F1FxEMF9dyiK2H5/1SUtzH0JuVo51h2wPfgyo=
+  ip: {client_ipv4}
+  ipv6: {client_ipv6}
+  private-key: {privKey}
+  public-key: {peer_pub}
   allowed-ips: ['0.0.0.0/0']
   udp: true
   mtu: 1280
@@ -155,3 +161,90 @@ rules:
   # other
   - MATCH,nl
 '''
+
+
+from urllib.request import Request, urlopen
+import urllib
+import time
+import json
+import sys
+
+import qrcode
+
+def warpgen0():
+    url = "https://www.warp-generator.workers.dev/"
+
+    headers = {
+        "accept": "*/*",
+        "accept-language": "en-US,en;q=0.9",
+        "origin": "https://warp-generator.github.io",
+        "priority": "u=1, i",
+        "referer": "https://warp-generator.github.io/",
+        "sec-ch-ua": '"Chromium";v="146", "Not-A.Brand";v="24", "Google Chrome";v="146"',
+        "sec-ch-ua-mobile": "?0",
+        "sec-ch-ua-platform": '"Linux"',
+        "sec-fetch-dest": "empty",
+        "sec-fetch-mode": "cors",
+        "sec-fetch-site": "cross-site",
+        "user-agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36",
+    }
+
+    req = Request(url, headers=headers, method="GET")
+
+    with urlopen(req, timeout=10) as resp:
+        body = resp.read().decode("utf-8")
+        return body
+
+
+def upload_text(text: str, expiry_days: int = 1) -> str:
+    data = urllib.parse.urlencode({
+        "content": text,
+        "expiry_days": str(expiry_days),
+    }).encode("utf-8")
+
+    req = urllib.request.Request(
+        "https://dpaste.com/api/v2/",
+        data=data,
+        headers={
+            "Content-Type": "application/x-www-form-urlencoded",
+            "User-Agent": "qr-paste-script/1.0",
+        },
+        method="POST",
+    )
+
+    with urllib.request.urlopen(req, timeout=20) as resp:
+        body = resp.read().decode("utf-8").strip()
+
+        if resp.status != 201:
+            raise RuntimeError(f"upload failed: HTTP {resp.status}: {body}")
+
+        return resp.headers.get("Location", body)
+
+
+def make_qr(url: str) -> None:
+    img = qrcode.make(url)
+    # img.save(png_path)
+
+    qr = qrcode.QRCode(border=1)
+    qr.add_data(url)
+    qr.make(fit=True)
+    qr.print_ascii(invert=True)
+
+def main():
+    while True:
+        try:
+            text = warpgen0()
+            data = json.loads(text)
+            out = config_template.format(**data)
+            print(out)
+            break
+        except Exception as err:
+            #print(f"Unexpected {err=}, {type(err)=}", file=sys.stderr)
+            pass
+    for i in range(1, 100):
+        try:
+            make_qr(upload_text)
+            break
+        except:
+            pass
+main()
