@@ -13,28 +13,9 @@ pip install git+https://github.com/lunardoesdev/cf101@main
 and then run `cf101`
 
 # donate
-- tron (trx) TAM5CeBSZJSy8hcnkNg6We2N8GAshCzQHM
-- bitcoin bc1qp5du4ntwjpypj5td0rn77jevlhxh7d2gaj4nsj
-- ethereum 0xEB7D2a99ebb8B57017839Cf29Ee84122Eb8aD668
-- usdt (eth network) 0xEB7D2a99ebb8B57017839Cf29Ee84122Eb8aD668
-- usdt (tron network) TAM5CeBSZJSy8hcnkNg6We2N8GAshCzQHM
-- usdt (solana network) 89im31VLY8TqBLkcKF8bW3pZybi2LhSZbrSZVs57TN51
-- usdt (polygon network) 0xEB7D2a99ebb8B57017839Cf29Ee84122Eb8aD668
-- usdt (bnb network) 0xEB7D2a99ebb8B57017839Cf29Ee84122Eb8aD668
-- bnb 0xEB7D2a99ebb8B57017839Cf29Ee84122Eb8aD668
-- xrp rPtCCos42XFv7rJVF3C1yfhBRpwBpKhUtM
-- usdc (ethereum) 0xEB7D2a99ebb8B57017839Cf29Ee84122Eb8aD668
-- usdc (solana) 89im31VLY8TqBLkcKF8bW3pZybi2LhSZbrSZVs57TN51
-- usdc (bnb) 0xEB7D2a99ebb8B57017839Cf29Ee84122Eb8aD668
-- usdc (polygon) 0xEB7D2a99ebb8B57017839Cf29Ee84122Eb8aD668
-- usdc (avalanche) 0xEB7D2a99ebb8B57017839Cf29Ee84122Eb8aD668
-- solana 89im31VLY8TqBLkcKF8bW3pZybi2LhSZbrSZVs57TN51
-- dogecoin DNiuyMR2LZs5tAqcaiRuQpDxJby21TdxjZ
-- cardano addr1q96qn9lpa9wvvv0wdc0wld6et858d56c3hykxmpz3qz9jqr5pxt7r62uccc7ums7a7m4jk0gwmf43rwfvdkz9zqytyqqeysccx
-- litecoin LbaffizVsoeX9pcETKwbwvMNXt2KWnkWhp
-- avalanche 0xEB7D2a99ebb8B57017839Cf29Ee84122Eb8aD668
-- polkadot 16aecsx67f71tN87YrEZDupjPjwNoxh5DTkiyoW4JKoWHJLV
-- polygon 0xEB7D2a99ebb8B57017839Cf29Ee84122Eb8aD668
-- polygon (ethereum) 0xEB7D2a99ebb8B57017839Cf29Ee84122Eb8aD668
-- cosmos cosmos192hkx8nxgpwy6mump5qtr7f7vfdpd2k2y29kj3
-- zcash t1ftmWttUwXC4xFYWJSNNtwuzDpGytjfnUJ
+- monero (xmr) 47Q4BM3towQZt1RSyFXNC75Tbop5REK23VnS3PQgdvhwFm21BRay3tDcFvrdp1iZeGgGavTb1ipF9CoQLWpQw4iW2JKBMYZ
+- bitcoin 1CTSXfwwmArU6Q2ibDDAA9v1vhkr262T7N
+- ethereum 0x537a27c83f5def35b58aa570cf915856e8e09810
+- usdt (tron) TJMbThidBi6NFrD5TCTZDDHtqtkfF7JbfP
+- ripple (xrp) rUuag243Lf56SnqF41Gv2oZsDDs7XJAikh
+- zcash t1UcccagVKYyBFxAaJ1savJ8kvuaMju1btc
