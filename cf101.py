@@ -165,6 +165,8 @@ rules:
 
 from urllib.request import Request, urlopen
 import urllib
+import urllib.request
+import urllib.parse
 import time
 import json
 import sys
@@ -198,23 +200,60 @@ def warpgen0():
         return body
 
 
-def upload_to_paste_rs(text: str) -> str:
-    data = text.encode("utf-8")
-    req = Request(
-        "https://paste.rs/",
-        data=data,
+class _NoRedirectHandler(urllib.request.HTTPRedirectHandler):
+    def http_error_301(self, req, fp, code, msg, headers):
+        return fp
+
+    def http_error_302(self, req, fp, code, msg, headers):
+        return fp
+
+    def http_error_303(self, req, fp, code, msg, headers):
+        return fp
+
+    def http_error_307(self, req, fp, code, msg, headers):
+        return fp
+
+    def http_error_308(self, req, fp, code, msg, headers):
+        return fp
+
+
+_NO_REDIRECT_OPENER = urllib.request.build_opener(_NoRedirectHandler)
+
+
+def upload_to_xpaste(text, ttl_days=7, language="text", auto_destroy=False, raw=True):
+    data = {
+        "language": language,
+        "body": text,
+        "ttl_days": str(ttl_days),
+    }
+    if auto_destroy:
+        data["auto_destroy"] = "true"
+
+    req = urllib.request.Request(
+        "https://xpaste.rg-spc.ru/paste",
+        data=urllib.parse.urlencode(data).encode("utf-8"),
         headers={
-            "Content-Type": "text/plain; charset=utf-8",
-            "User-Agent": "temp-paste-script/1.0",
+            "Content-Type": "application/x-www-form-urlencoded",
+            "User-Agent": "python-xpaste/1.0",
+            "Accept": "text/plain, text/html, */*",
         },
         method="POST",
     )
 
-    with urlopen(req, timeout=20) as resp:
-        body = resp.read().decode("utf-8").strip()
-        if resp.status not in (201, 206):
-            raise RuntimeError(f"paste.rs upload failed: HTTP {resp.status}: {body}")
-        return body
+    with _NO_REDIRECT_OPENER.open(req, timeout=20) as resp:
+        body = resp.read().decode("utf-8", errors="replace").strip()
+        url = (resp.headers.get("Location") or body).strip()
+
+    if url.startswith("/"):
+        url = urllib.parse.urljoin("https://xpaste.rg-spc.ru/", url)
+
+    if not url.startswith("http"):
+        raise RuntimeError(f"xPaste upload failed: {url!r}")
+
+    if raw:
+        url += "&raw" if "?" in url else "?raw"
+
+    return url
 
 
 
@@ -240,7 +279,7 @@ def main():
             pass
     for i in range(1, 100):
         try:
-            url = upload_to_paste_rs(out)
+            url = upload_to_xpaste(out)
             print(url)
             make_qr(url)
             break
