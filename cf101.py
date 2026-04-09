@@ -241,8 +241,8 @@ def main():
     for i in range(1, 100):
         try:
             url = upload_to_paste_rs(out)
-            print(url + ".txt")
-            make_qr(url + ".txt")
+            print(url)
+            make_qr(url)
             break
         except:
             pass
