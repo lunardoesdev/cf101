@@ -267,6 +267,7 @@ def make_qr(url: str) -> None:
     qr.print_ascii(invert=True)
 
 def main():
+    print("Loading and generating your configuration... This can take up to 3-5 minutes, be patient...")
     while True:
         try:
             text = warpgen0()
@@ -285,7 +286,9 @@ def main():
             break
         except:
             pass
-main()
+
+if __name__ == "__main__":
+    main()
 
 
 
