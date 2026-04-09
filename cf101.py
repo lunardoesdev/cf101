@@ -168,6 +168,8 @@ import urllib
 import time
 import json
 import sys
+import socket
+import uuid
 
 import qrcode
 
@@ -196,29 +198,24 @@ def warpgen0():
         return body
 
 
-def upload_text(text: str, expiry_days: int = 1) -> str:
-    data = urllib.parse.urlencode({
-        "content": text,
-        "expiry_days": str(expiry_days),
-    }).encode("utf-8")
-
-    req = urllib.request.Request(
-        "https://dpaste.com/api/v2/",
+def upload_to_paste_rs(text: str) -> str:
+    data = text.encode("utf-8")
+    req = Request(
+        "https://paste.rs/",
         data=data,
         headers={
-            "Content-Type": "application/x-www-form-urlencoded",
-            "User-Agent": "qr-paste-script/1.0",
+            "Content-Type": "text/plain; charset=utf-8",
+            "User-Agent": "temp-paste-script/1.0",
         },
         method="POST",
     )
 
-    with urllib.request.urlopen(req, timeout=20) as resp:
+    with urlopen(req, timeout=20) as resp:
         body = resp.read().decode("utf-8").strip()
+        if resp.status not in (201, 206):
+            raise RuntimeError(f"paste.rs upload failed: HTTP {resp.status}: {body}")
+        return body
 
-        if resp.status != 201:
-            raise RuntimeError(f"upload failed: HTTP {resp.status}: {body}")
-
-        return resp.headers.get("Location", body)
 
 
 def make_qr(url: str) -> None:
@@ -243,10 +240,16 @@ def main():
             pass
     for i in range(1, 100):
         try:
-            url = upload_text(out)
+            url = upload_to_paste_rs(out)
             print(url + ".txt")
             make_qr(url + ".txt")
             break
         except:
             pass
 main()
+
+
+
+
+
+
