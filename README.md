@@ -12,6 +12,10 @@ pip install git+https://github.com/lunardoesdev/cf101@main
 ```
 and then run `cf101`
 
+# demo
+
+![./demo.gif](./demo.gif)
+
 # donate
 - monero (xmr) 47Q4BM3towQZt1RSyFXNC75Tbop5REK23VnS3PQgdvhwFm21BRay3tDcFvrdp1iZeGgGavTb1ipF9CoQLWpQw4iW2JKBMYZ
 - bitcoin 1CTSXfwwmArU6Q2ibDDAA9v1vhkr262T7N
