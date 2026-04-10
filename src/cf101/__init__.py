@@ -18,7 +18,7 @@ config_template = '''warp-common: &warp-common
   # addr possible: 162.159.192.* 
   server: 162.159.192.4
   # ports possible: 1014 934 4500 500 1701 4443 8443 8095 2408 1010
-  port: 1010
+  port: 934
   
 
 
