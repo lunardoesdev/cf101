@@ -19,8 +19,7 @@ config_template = '''warp-common: &warp-common
   server: 162.159.192.1
   # ports possible: 1014 934 4500 500 1701 4443 8443 8095 2408 1010
   port: 934
-  
-
+  persistent-keepalive: 25
 
 warp-nl-common: &warp-nl-common
   <<: *warp-common
