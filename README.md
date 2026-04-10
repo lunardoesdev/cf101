@@ -12,6 +12,8 @@ pip install git+https://github.com/lunardoesdev/cf101@main
 ```
 and then run `cf101`
 
+After that, simply import that configuration by qr code or direct link using your favourite clash-compatible app.
+
 # demo
 
 ![./demo.gif](./demo.gif)
