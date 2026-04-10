@@ -16,7 +16,7 @@ config_template = '''warp-common: &warp-common
   remote-dns-resolve: true
   dns: [1.1.1.1, 1.0.0.1, 2606:4700:4700::1111, 2606:4700:4700::1001]
   # addr possible: 162.159.192.* 
-  server: 162.159.192.4
+  server: 162.159.192.1
   # ports possible: 1014 934 4500 500 1701 4443 8443 8095 2408 1010
   port: 934
   
