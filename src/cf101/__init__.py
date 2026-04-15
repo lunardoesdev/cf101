@@ -63,6 +63,7 @@ dns:
   fake-ip-filter-mode: rule
   fake-ip-filter:
     - DOMAIN-SUFFIX,i2p,fake-ip
+    - DOMAIN-SUFFIX,onion,fake-ip
     - MATCH,fake-ip
   nameserver:
     - https://dns.google/dns-query
@@ -127,6 +128,16 @@ proxies:
     server: 127.0.0.1
     port: 4447
 
+  - name: "tor"
+    type: socks5
+    server: 127.0.0.1
+    port: 9050
+
+  - name: "tor-browser"
+    type: socks5
+    server: 127.0.0.1
+    port: 9150
+
 
 proxy-groups:
 - name: i2p
@@ -134,6 +145,19 @@ proxy-groups:
   proxies:
     - "i2p-http"
     - "i2p-socks"
+
+- name: onion
+  type: url-test
+  lazy: true
+  proxies:
+    - "tor"
+    - "tor-browser"
+  url: "https://www.gstatic.com/generate_204"
+  interval: 300
+  tolerance: 100
+  idle_timeout: 10
+  max-failed-times: 3
+  expected-status: 204
 
 - name: legacy
   type: select
@@ -201,7 +225,9 @@ rules:
   - IP-CIDR6,fc00::/7,DIRECT,no-resolve
   - IP-CIDR6,fe80::/10,DIRECT,no-resolve
   # i2p
-  - DOMAIN-SUFFIX,i2p,i2p-socks
+  - DOMAIN-SUFFIX,i2p,i2p
+  # onion
+  - DOMAIN-SUFFIX,onion,onion
   # ru
   - GEOIP,RU,DIRECT
   - DOMAIN-SUFFIX,ru,DIRECT
@@ -336,7 +362,6 @@ def main():
 
 if __name__ == "__main__":
     main()
-
 
 
 

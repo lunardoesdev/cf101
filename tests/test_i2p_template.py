@@ -1,7 +1,7 @@
 from cf101 import config_template
 
 
-def test_config_template_includes_i2p_dns_and_proxy_routing():
+def test_config_template_includes_i2p_and_onion_dns_and_proxy_routing():
     rendered = config_template.format(
         client_ipv4="172.16.0.2",
         client_ipv6="2606:4700:110:8765::2",
@@ -11,6 +11,7 @@ def test_config_template_includes_i2p_dns_and_proxy_routing():
 
     assert "fake-ip-filter-mode: rule" in rendered
     assert "DOMAIN-SUFFIX,i2p,fake-ip" in rendered
+    assert "DOMAIN-SUFFIX,onion,fake-ip" in rendered
     assert 'name: "i2p-http"' in rendered
     assert "type: http" in rendered
     assert "port: 4444" in rendered
@@ -19,3 +20,9 @@ def test_config_template_includes_i2p_dns_and_proxy_routing():
     assert "port: 4447" in rendered
     assert "- name: i2p" in rendered
     assert '- DOMAIN-SUFFIX,i2p,i2p' in rendered
+    assert 'name: "tor"' in rendered
+    assert "port: 9050" in rendered
+    assert 'name: "tor-browser"' in rendered
+    assert "port: 9150" in rendered
+    assert "- name: onion" in rendered
+    assert '- DOMAIN-SUFFIX,onion,onion' in rendered
