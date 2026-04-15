@@ -4,7 +4,8 @@
 # dependencies = ["qrcode[pil]"]
 # ///
 
-config_template = '''warp-common: &warp-common
+config_template = '''
+warp-common: &warp-common
   type: wireguard
   ip: {client_ipv4}
   ipv6: {client_ipv6}
@@ -53,6 +54,18 @@ awg1-config-type3: &awg1-config-type3
  i2: <b 0x5349502f322e302031303020547279696e670d0a5669613a205349502f322e302f55445020706333332e61746c616e74612e636f6d3b6272616e63683d7a39684734624b3737366173646864730d0a546f3a20426f62203c7369703a626f624062696c6f78692e636f6d3e0d0a46726f6d3a20416c696365203c7369703a616c6963654061746c616e74612e636f6d3e3b7461673d313932383330313737340d0a43616c6c2d49443a20613834623463373665363637313040706333332e61746c616e74612e636f6d0d0a435365713a2033313431353920494e564954450d0a436f6e74656e742d4c656e6774683a20300d0a0d0a>
 
 
+dns:
+  enable: true
+  ipv6: true
+  listen: 0.0.0.0:1053
+  enhanced-mode: fake-ip
+  fake-ip-range: 198.18.0.1/16
+  nameserver:
+    - https://dns.google/dns-query
+    - https://cloudflare-dns.com/dns-query
+  fallback:
+    - tls://1.1.1.1
+    - tls://8.8.8.8
 
 proxies:
   - name: "awg-1"
