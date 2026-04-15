@@ -237,7 +237,7 @@ proxy-groups:
   interval: 300
   tolerance: 1000
   idle_timeout: 10
-  max-failed-times: 3
+  max-failed-times: 30
   expected-status: 204
 
 - name: nl
@@ -251,7 +251,7 @@ proxy-groups:
   interval: 300
   tolerance: 1000
   idle_timeout: 10
-  max-failed-times: 3
+  max-failed-times: 30
   expected-status: 204
 
 - name: fi1
@@ -265,7 +265,7 @@ proxy-groups:
   interval: 300
   tolerance: 1000
   idle_timeout: 10
-  max-failed-times: 3
+  max-failed-times: 30
   expected-status: 204
 
 
