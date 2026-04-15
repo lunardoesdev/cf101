@@ -83,6 +83,62 @@ proxies:
     amnezia-wg-option:
       <<: [*awg1-config-common, *awg1-config-type3]
 
+  - name: "awg-o1"
+    <<: *warp-common
+    server: 162.159.192.2
+    amnezia-wg-option:
+      <<: [*awg1-config-common, *awg1-config-type1]
+
+  - name: "awg-o2"
+    <<: *warp-common
+    server: 162.159.192.2
+    amnezia-wg-option:
+      <<: [*awg1-config-common, *awg1-config-type2]
+
+  - name: "awg-o3"
+    <<: *warp-common
+    server: 162.159.192.2
+    amnezia-wg-option:
+      <<: [*awg1-config-common, *awg1-config-type3]
+
+  - name: "awg-l1"
+    <<: *warp-common
+    server: 162.159.192.3
+    amnezia-wg-option:
+      <<: [*awg1-config-common, *awg1-config-type1]
+
+  - name: "awg-l2"
+    <<: *warp-common
+    server: 162.159.192.3
+    amnezia-wg-option:
+      <<: [*awg1-config-common, *awg1-config-type2]
+
+  - name: "awg-l3"
+    <<: *warp-common
+    server: 162.159.192.3
+    amnezia-wg-option:
+      <<: [*awg1-config-common, *awg1-config-type3]
+
+  - name: "awg-k1"
+    <<: *warp-common
+    server: 162.159.192.4
+    amnezia-wg-option:
+      <<: [*awg1-config-common, *awg1-config-type1]
+
+  - name: "awg-k2"
+    <<: *warp-common
+    server: 162.159.192.4
+    amnezia-wg-option:
+      <<: [*awg1-config-common, *awg1-config-type2]
+
+  - name: "awg-k3"
+    <<: *warp-common
+    server: 162.159.192.4
+    amnezia-wg-option:
+      <<: [*awg1-config-common, *awg1-config-type3]
+
+
+
   - name: "awg-nl-1"
     <<: *warp-nl-common
     amnezia-wg-option:
@@ -168,9 +224,15 @@ proxy-groups:
   type: url-test
   lazy: true
   proxies:
-    - "awg-1"
-    - "awg-2"
-    - "awg-3"
+    - "awg-o1"
+    - "awg-o2"
+    - "awg-o3"
+    - "awg-k1"
+    - "awg-k2"
+    - "awg-k3"
+    - "awg-l1"
+    - "awg-l2"
+    - "awg-l3"
   url: "https://www.gstatic.com/generate_204"
   interval: 300
   tolerance: 100
