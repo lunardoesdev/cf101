@@ -60,11 +60,6 @@ dns:
   listen: 0.0.0.0:1053
   enhanced-mode: fake-ip
   fake-ip-range: 198.18.0.1/16
-  fake-ip-filter-mode: rule
-  fake-ip-filter:
-    - DOMAIN-SUFFIX,i2p,fake-ip
-    - DOMAIN-SUFFIX,onion,fake-ip
-    - MATCH,fake-ip
   nameserver:
     - https://dns.google/dns-query
     - https://cloudflare-dns.com/dns-query
@@ -225,7 +220,7 @@ rules:
   - IP-CIDR6,fc00::/7,DIRECT,no-resolve
   - IP-CIDR6,fe80::/10,DIRECT,no-resolve
   # i2p
-  - DOMAIN-SUFFIX,i2p,i2p
+  - DOMAIN-SUFFIX,i2p,i2p-socks
   # onion
   - DOMAIN-SUFFIX,onion,onion
   # ru
@@ -362,7 +357,6 @@ def main():
 
 if __name__ == "__main__":
     main()
-
 
 
 

@@ -9,9 +9,8 @@ def test_config_template_includes_i2p_and_onion_dns_and_proxy_routing():
         peer_pub="pub",
     )
 
-    assert "fake-ip-filter-mode: rule" in rendered
-    assert "DOMAIN-SUFFIX,i2p,fake-ip" in rendered
-    assert "DOMAIN-SUFFIX,onion,fake-ip" in rendered
+    assert "enhanced-mode: fake-ip" in rendered
+    assert "fake-ip-range: 198.18.0.1/16" in rendered
     assert 'name: "i2p-http"' in rendered
     assert "type: http" in rendered
     assert "port: 4444" in rendered
