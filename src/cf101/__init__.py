@@ -60,6 +60,10 @@ dns:
   listen: 0.0.0.0:1053
   enhanced-mode: fake-ip
   fake-ip-range: 198.18.0.1/16
+  fake-ip-filter-mode: rule
+  fake-ip-filter:
+    - DOMAIN-SUFFIX,i2p,fake-ip
+    - MATCH,fake-ip
   nameserver:
     - https://dns.google/dns-query
     - https://cloudflare-dns.com/dns-query
@@ -113,8 +117,24 @@ proxies:
     amnezia-wg-option:
       <<: [*awg1-config-common, *awg1-config-type3]
 
+  - name: "i2p-http"
+    type: http
+    server: 127.0.0.1
+    port: 4444
+
+  - name: "i2p-socks"
+    type: socks5
+    server: 127.0.0.1
+    port: 4447
+
 
 proxy-groups:
+- name: i2p
+  type: select
+  proxies:
+    - "i2p-http"
+    - "i2p-socks"
+
 - name: legacy
   type: select
   icon: https://www.vectorlogo.zone/logos/cloudflare/cloudflare-icon.svg
@@ -180,6 +200,8 @@ rules:
   - IP-CIDR6,::1/128,DIRECT,no-resolve
   - IP-CIDR6,fc00::/7,DIRECT,no-resolve
   - IP-CIDR6,fe80::/10,DIRECT,no-resolve
+  # i2p
+  - DOMAIN-SUFFIX,i2p,i2p
   # ru
   - GEOIP,RU,DIRECT
   - DOMAIN-SUFFIX,ru,DIRECT
@@ -314,7 +336,6 @@ def main():
 
 if __name__ == "__main__":
     main()
-
 
 
 
