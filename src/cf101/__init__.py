@@ -201,7 +201,7 @@ rules:
   - IP-CIDR6,fc00::/7,DIRECT,no-resolve
   - IP-CIDR6,fe80::/10,DIRECT,no-resolve
   # i2p
-  - DOMAIN-SUFFIX,i2p,i2p
+  - DOMAIN-SUFFIX,i2p,i2p-socks
   # ru
   - GEOIP,RU,DIRECT
   - DOMAIN-SUFFIX,ru,DIRECT
