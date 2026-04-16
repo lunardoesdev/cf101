@@ -235,7 +235,7 @@ proxy-groups:
     - "awg-l3"
   url: "https://www.gstatic.com/generate_204"
   interval: 300
-  tolerance: 1000
+  tolerance: 300
   idle_timeout: 10
   max-failed-times: 30
   expected-status: 204
@@ -249,7 +249,7 @@ proxy-groups:
     - "awg-nl-3"
   url: "https://www.gstatic.com/generate_204"
   interval: 300
-  tolerance: 1000
+  tolerance: 300
   idle_timeout: 10
   max-failed-times: 30
   expected-status: 204
@@ -263,7 +263,7 @@ proxy-groups:
     - "awg-fi1-3"
   url: "https://www.gstatic.com/generate_204"
   interval: 300
-  tolerance: 1000
+  tolerance: 300
   idle_timeout: 10
   max-failed-times: 30
   expected-status: 204
