@@ -145,6 +145,12 @@ proxies:
     amnezia-wg-option:
       <<: [*awg1-config-common, *awg1-config-type4]
 
+  - name: "awg-e2"
+    <<: *warp-common
+    server: 162.159.195.8
+    amnezia-wg-option:
+      <<: [*awg1-config-common, *awg1-config-type2]
+
   - name: "awg-e3"
     <<: *warp-common
     server: 162.159.195.8
@@ -248,6 +254,7 @@ proxy-groups:
     - "awg-e3"
     - "awg-k2"
     - "awg-e4"
+    - "awg-e2"
   url: "https://www.gstatic.com/generate_204"
   interval: 300
   tolerance: 300
