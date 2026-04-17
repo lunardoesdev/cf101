@@ -250,15 +250,16 @@ proxy-groups:
   type: url-test
   lazy: true
   proxies:
-    - "awg-k4"
+    - "awg-e2"
     - "awg-e3"
     - "awg-k2"
     - "awg-e4"
-    - "awg-e2"
+    - "awg-k4"
   url: "https://www.gstatic.com/generate_204"
   interval: 300
   tolerance: 300
   idle_timeout: 10
+  timeout: 10000
   max-failed-times: 30
   expected-status: 204
 
