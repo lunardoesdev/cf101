@@ -250,6 +250,9 @@ proxy-groups:
   type: url-test
   lazy: true
   proxies:
+    - "awg-2"
+    - "awg-1"
+    - "awg-3"
     - "awg-e2"
     - "awg-e3"
     - "awg-k2"
